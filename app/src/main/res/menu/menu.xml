@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/LogOut"
+        android:title="Salir"
+        android:tooltipText=""
+        android:icon="@drawable/bx_exit"
+        app:showAsAction="ifRoom"/>
+</menu>

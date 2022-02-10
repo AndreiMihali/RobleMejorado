@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/grupo1"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/homeFragment"
+            android:checked="true"
+            android:icon="@drawable/bx_home"
+            android:title="Página principal" />
+
+        <item android:id="@+id/faltasFragment"
+            android:icon="@drawable/bxs_calendar_check"
+            android:title="Faltas de asistencia"/>
+
+        <item android:id="@+id/notasFragment"
+            android:icon="@drawable/bxs_graduation"
+            android:title="Notas del curso actual" />
+
+        <item android:id="@+id/horarioFragment"
+            android:icon="@drawable/bx_calendar_week"
+            android:title="Horario"/>
+
+        <item android:id="@+id/profileActivity"
+            android:title="Perfil"
+            android:icon="@drawable/bx_user"
+            android:checkable="false"/>
+
+    </group>
+    <group android:id="@+id/grupo2">
+
+        <item android:id="@+id/aboutUsFragment"
+            android:title="Calendario" />
+
+        <item android:id="@+id/helpUsFragment"
+            android:title="Tablón anuncios" />
+    </group>
+</menu>

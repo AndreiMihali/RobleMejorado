@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.roblemejorado.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/faltasFragment"
+        android:name="com.example.roblemejorado.fragments.faltasFragment"
+        android:label="fragment_faltas"
+        tools:layout="@layout/fragment_faltas" />
+    <fragment
+        android:id="@+id/notasFragment"
+        android:name="com.example.roblemejorado.fragments.notasFragment"
+        android:label="fragment_notas"
+        tools:layout="@layout/fragment_notas" />
+    <fragment
+        android:id="@+id/horarioFragment"
+        android:name="com.example.roblemejorado.fragments.horarioFragment"
+        android:label="fragment_horario"
+        tools:layout="@layout/fragment_horario" />
+</navigation>
