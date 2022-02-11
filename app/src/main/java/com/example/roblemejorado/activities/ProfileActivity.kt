@@ -1,11 +1,12 @@
-package com.example.roblemejorado
+package com.example.roblemejorado.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.roblemejorado.R
 
-class LoginActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_profile)
     }
 }

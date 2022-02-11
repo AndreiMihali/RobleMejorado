@@ -7,19 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.roblemejorado.R
+import com.google.firebase.auth.FirebaseAuth
 
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
 
-    private lateinit var sp:SharedPreferences
+    private lateinit var auth:FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sp=getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE)
+        auth= FirebaseAuth.getInstance();
+        var user=auth.currentUser
 
         setContentView(R.layout.activity_splash_screen)
         Handler().postDelayed(Runnable {
-            intent = if(sp.getBoolean("Logeado",false)){
+            intent = if(user!=null){
                 Intent(this, MainActivity::class.java)
             }else{
                 Intent(this, LoginActivity::class.java)

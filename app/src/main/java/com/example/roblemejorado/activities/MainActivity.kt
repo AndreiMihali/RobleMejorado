@@ -1,14 +1,13 @@
 package com.example.roblemejorado.activities
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -23,16 +22,19 @@ import com.example.roblemejorado.fragments.notasFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var navigationView:NavigationView
     private lateinit var openDrawer:MaterialCardView
-    private lateinit var name:String
-    private lateinit var last_name:String
-    private lateinit var email:String
-    private lateinit var sp:SharedPreferences
+    private lateinit var bd:FirebaseFirestore
+    private lateinit var nombre:String
+    private lateinit var apellidos: String
+    private lateinit var link:String
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,14 +44,15 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     private fun init(){
         val coordinatorLayout=findViewById<AppBarLayout>(R.id.app_bar) as CoordinatorLayout
         val toolbar=coordinatorLayout.findViewById<Toolbar>(R.id.toolbar)
-        sp=getSharedPreferences(getString(R.string.preferences),Context.MODE_PRIVATE)
-        name= sp.getString("username","admin")!!
-        email="user@gmail.com";
-        last_name="";
+        bd= FirebaseFirestore.getInstance()
+        nombre=""
+        apellidos=""
+        link=""
         setSupportActionBar(toolbar)
         drawerLayout=findViewById(R.id.drawer_layout)
         navigationView=findViewById(R.id.my_NavView)
         replaceFragment(HomeFragment())
+        getUserData()
 
         openDrawer=findViewById(R.id.card_profile)
         openDrawer.setOnClickListener {
@@ -57,9 +60,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             val username=findViewById<TextView>(R.id.txt_menu_nombre)
             val em=findViewById<TextView>(R.id.txt_menu_email)
 
-            username.text= "$name $last_name"
-            em.text=email
-
+            username.text="$nombre $apellidos"
+            em.text=FirebaseAuth.getInstance().currentUser?.email
         }
         navigationView.setNavigationItemSelectedListener(this)
 
@@ -85,9 +87,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 setMessage("¿Esta seguro de que desea salir?")
                 setTitle("Confirmar")
             }.setPositiveButton("Aceptar") { dialog, which ->
-                sp.edit().apply() {
-                    clear()
-                }.commit()
+                val auth=FirebaseAuth.getInstance()
+                auth.signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }.setNegativeButton("Cancelar"){dialog,which ->
@@ -115,5 +116,17 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         return true
     }
 
+    private fun getUserData(){
+        val auth=FirebaseAuth.getInstance().currentUser
+
+        auth?.email.let {
+            bd.collection("users").document(it!!).get()
+                .addOnSuccessListener {it2->
+                        nombre=it2.getString("nombre").toString()
+                        apellidos=it2.getString("Apellidos").toString()
+                        link=it2.getString("centro_estudios").toString()
+                   }
+                }
+        }
 
 }
