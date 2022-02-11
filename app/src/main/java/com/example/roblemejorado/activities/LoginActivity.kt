@@ -41,73 +41,72 @@ class LoginActivity : AppCompatActivity() {
         edit_password=findViewById(R.id.edit_pasword)
         acceder=findViewById(R.id.acceder)
         firebase= FirebaseFirestore.getInstance()
-        acceder.isEnabled=false
         progressDialog= ProgressDialog(this)
         putListeners()
     }
 
-    private fun putListeners(){
+    private fun putListeners() {
         layout_username.addOnEditTextAttachedListener {
-            if(it.childCount>=1){
-                layout_username.endIconMode=TextInputLayout.END_ICON_CLEAR_TEXT
+            if (it.childCount >= 1) {
+                layout_username.endIconMode = TextInputLayout.END_ICON_CLEAR_TEXT
             }
         }
 
         edit_username.setOnFocusChangeListener { v, hasFocus ->
-            if(hasFocus){
-                layout_username.isErrorEnabled=false
-            }else{
-                if(edit_username.text.toString().isEmpty()){
-                    layout_username.error="Debe introducir un usuario"
-                    acceder.isEnabled=false
-                }else{
-                    acceder.isEnabled=true
+            if (hasFocus) {
+                layout_username.isErrorEnabled = false
+            } else {
+                if (edit_username.text.toString().isEmpty()) {
+                    layout_username.error = "Debe introducir un usuario"
                 }
             }
-        }
 
-        edit_password.setOnFocusChangeListener{v,hasFocus->
-            if(hasFocus){
-                layout_password.isErrorEnabled=false
-            }else{
-                if(edit_password.text.toString().isEmpty()){
-                    layout_password.error="Debe introducir una contraseña"
-                    acceder.isEnabled=false
-                }else{
-                    acceder.isEnabled=true
+            edit_password.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    layout_password.isErrorEnabled = false
+                } else {
+                    if (edit_password.text.toString().isEmpty()) {
+                        layout_password.error = "Debe introducir una contraseña"
+                    }
                 }
             }
-        }
 
-        acceder.setOnClickListener {
-            progressDialog.setMessage("Espere por favor...")
-            progressDialog.show()
-            if(edit_username.text.isNullOrEmpty()||edit_password.text.isNullOrEmpty()){
-                Snackbar.make(findViewById(R.id.lm),"Debe rellenar ambos campos",Snackbar.LENGTH_LONG).show()
-                progressDialog.dismiss()
-            }else {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(edit_username.text!!.trim().toString(),edit_password.text!!.trim().toString())
-                    .addOnCompleteListener(OnCompleteListener {
-                        if(it.isSuccessful){
-                            progressDialog.dismiss()
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }else{
-                            progressDialog.dismiss()
-                            Snackbar.make(
-                                findViewById(R.id.lm),
-                                "Usuario o contraseña incorrectos",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                            edit_password?.text = null
-                            edit_username?.text = null
-                            layout_username.isErrorEnabled = false
-                            layout_password.isErrorEnabled = false
-                        }
-                    })
+            acceder.setOnClickListener {
+                progressDialog.setMessage("Espere por favor...")
+                progressDialog.show()
+                if (edit_username.text.isNullOrEmpty() || edit_password.text.isNullOrEmpty()) {
+                    Snackbar.make(
+                        findViewById(R.id.lm),
+                        "Debe rellenar ambos campos",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    progressDialog.dismiss()
+                } else {
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                        edit_username.text!!.trim().toString(),
+                        edit_password.text!!.trim().toString()
+                    )
+                        .addOnCompleteListener(OnCompleteListener {
+                            if (it.isSuccessful) {
+                                progressDialog.dismiss()
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                progressDialog.dismiss()
+                                Snackbar.make(
+                                    findViewById(R.id.lm),
+                                    "Usuario o contraseña incorrectos",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                                edit_password?.text = null
+                                edit_username?.text = null
+                                layout_username.isErrorEnabled = false
+                                layout_password.isErrorEnabled = false
+                            }
+                        })
+                }
             }
         }
     }
-
 }

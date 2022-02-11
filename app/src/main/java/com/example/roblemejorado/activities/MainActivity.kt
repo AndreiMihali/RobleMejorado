@@ -6,6 +6,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewTreeObserver
+import android.widget.SlidingDrawer
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -25,7 +28,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener,DrawerLayout.DrawerListener{
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var navigationView:NavigationView
     private lateinit var openDrawer:MaterialCardView
@@ -54,18 +57,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         replaceFragment(HomeFragment())
         getUserData()
 
+        drawerLayout.addDrawerListener(this)
+
         openDrawer=findViewById(R.id.card_profile)
+
         openDrawer.setOnClickListener {
             drawerLayout.open()
-            val username=findViewById<TextView>(R.id.txt_menu_nombre)
-            val em=findViewById<TextView>(R.id.txt_menu_email)
-
-            username.text="$nombre $apellidos"
-            em.text=FirebaseAuth.getInstance().currentUser?.email
         }
+
         navigationView.setNavigationItemSelectedListener(this)
 
     }
+
+
 
 
     private fun replaceFragment(fragment: Fragment) {
@@ -129,4 +133,22 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 }
         }
 
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+        if(slideOffset!=0f){
+            val username=findViewById<TextView>(R.id.txt_menu_nombre)
+            val em=findViewById<TextView>(R.id.txt_menu_email)
+
+            username.text="$nombre $apellidos"
+            em.text=FirebaseAuth.getInstance().currentUser?.email
+        }
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
+    }
 }
