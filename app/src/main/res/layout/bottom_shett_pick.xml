@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Cambia tu foto de perfil"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imagen_camara"
+                android:layout_width="40dp"
+                android:src="@drawable/ic_baseline_camera_alt_24"
+                android:layout_height="40dp"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_camara"
+                android:layout_width="wrap_content"
+                android:text="Camera"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gallery"
+            android:layout_marginStart="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iamgen_galeria"
+                android:layout_width="40dp"
+                android:src="@drawable/ic_baseline_photo_size_select_actual_24"
+                android:layout_height="40dp"
+                app:tint="?attr/colorPrimary" />
+            <TextView
+                android:id="@+id/txt_galeria"
+                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:text="Gallery"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

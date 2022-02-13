@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     private lateinit var nombre:String
     private lateinit var apellidos: String
     private lateinit var link:String
+    private lateinit var matriculado:String
     private lateinit var fotoPerfil:String
     private lateinit var fotoToolbar:ImageView
 
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         apellidos=""
         link=""
         fotoPerfil=""
+        matriculado=""
         setSupportActionBar(toolbar)
         drawerLayout=findViewById(R.id.drawer_layout)
         navigationView=findViewById(R.id.my_NavView)
@@ -119,10 +121,25 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.faltasFragment ->replaceFragment(faltasFragment())
             R.id.notasFragment ->replaceFragment(notasFragment())
             R.id.horarioFragment ->replaceFragment(horarioFragment())
+            R.id.profileActivity -> {
+                val intent=Intent(this,ProfileActivity::class.java).apply {
+                    putExtra("nombre","$nombre $apellidos")
+                    putExtra("correo",FirebaseAuth.getInstance().currentUser?.email.toString())
+                    putExtra("matriculado",matriculado)
+                    putExtra("imagen",fotoPerfil)
+                }
+                startActivity(intent)
+            }
             else -> return true
         }
         return true
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        getUserData()
+    }
+
 
     private fun getUserData(){
         val auth=FirebaseAuth.getInstance().currentUser
@@ -134,6 +151,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                         apellidos=it2.getString("Apellidos").toString()
                         link=it2.getString("centro_estudios").toString()
                         fotoPerfil=it2.get("iamgenPerfil").toString()
+                        matriculado=it2.get("matriculado").toString()
                         Glide.with(applicationContext).load(fotoPerfil).into(fotoToolbar)
                    }
                 }

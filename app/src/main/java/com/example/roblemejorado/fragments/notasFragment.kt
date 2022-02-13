@@ -55,8 +55,7 @@ class notasFragment : Fragment() {
             when(checkedId){
                 R.id.button1->{txt_evaluacion.text="1º EVALUACIÓN"
                                 getData1("1_EVA")}
-                R.id.button1_1->{txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
-                                getData1("2_EVA")}
+                R.id.button1_1->txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
                 R.id.button2->txt_evaluacion.text="ORDINARIA"
                 R.id.button3->txt_evaluacion.text="EXTRAORDINARIA"
             }
