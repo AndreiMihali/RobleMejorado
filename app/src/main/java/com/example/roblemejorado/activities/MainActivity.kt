@@ -1,14 +1,13 @@
 package com.example.roblemejorado.activities
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewTreeObserver
-import android.widget.SlidingDrawer
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.roblemejorado.R
 import com.example.roblemejorado.fragments.HomeFragment
 import com.example.roblemejorado.fragments.faltasFragment
@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     private lateinit var nombre:String
     private lateinit var apellidos: String
     private lateinit var link:String
+    private lateinit var fotoPerfil:String
+    private lateinit var fotoToolbar:ImageView
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +49,12 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     private fun init(){
         val coordinatorLayout=findViewById<AppBarLayout>(R.id.app_bar) as CoordinatorLayout
         val toolbar=coordinatorLayout.findViewById<Toolbar>(R.id.toolbar)
+        fotoToolbar=findViewById(R.id.open_drawer)
         bd= FirebaseFirestore.getInstance()
         nombre=""
         apellidos=""
         link=""
+        fotoPerfil=""
         setSupportActionBar(toolbar)
         drawerLayout=findViewById(R.id.drawer_layout)
         navigationView=findViewById(R.id.my_NavView)
@@ -129,6 +133,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                         nombre=it2.getString("nombre").toString()
                         apellidos=it2.getString("Apellidos").toString()
                         link=it2.getString("centro_estudios").toString()
+                        fotoPerfil=it2.get("iamgenPerfil").toString()
+                        Glide.with(applicationContext).load(fotoPerfil).into(fotoToolbar)
                    }
                 }
         }
@@ -137,9 +143,10 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         if(slideOffset!=0f){
             val username=findViewById<TextView>(R.id.txt_menu_nombre)
             val em=findViewById<TextView>(R.id.txt_menu_email)
-
+            val foto=findViewById<ImageView>(R.id.imagen_menu_profile)
             username.text="$nombre $apellidos"
             em.text=FirebaseAuth.getInstance().currentUser?.email
+            Glide.with(applicationContext).load(fotoPerfil).into(foto)
         }
     }
 
