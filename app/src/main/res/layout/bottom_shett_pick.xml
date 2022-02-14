@@ -37,7 +37,7 @@
             <TextView
                 android:id="@+id/txt_camara"
                 android:layout_width="wrap_content"
-                android:text="Camera"
+                android:text="Càmara"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"/>
@@ -61,7 +61,7 @@
                 android:id="@+id/txt_galeria"
                 android:layout_width="wrap_content"
                 android:textColor="@color/black"
-                android:text="Gallery"
+                android:text="Galeria"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
