@@ -49,9 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/card_perfil"
                 android:layout_alignBottom="@id/card_perfil"
-                android:backgroundTint="?attr/colorPrimary"
-                android:src="@drawable/ic_baseline_camera_alt_24"
-                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+                app:backgroundTint="?attr/colorPrimary"
+                app:tint="@color/white"
                 tools:ignore="SpeakableTextPresentCheck" />
         </RelativeLayout>
 

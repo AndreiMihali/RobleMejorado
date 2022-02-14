@@ -96,7 +96,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif"
                 android:text="MEDIA"
-                android:textColor="#0E0E0E"
+                android:textColor="#077369"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
