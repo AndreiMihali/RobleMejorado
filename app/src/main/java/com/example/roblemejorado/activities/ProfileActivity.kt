@@ -3,7 +3,6 @@ package com.example.roblemejorado.activities
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -25,9 +24,10 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.roblemejorado.R
 import com.example.roblemejorado.common.Companion
-import com.google.android.gms.common.internal.service.Common
+import com.example.roblemejorado.fullScreenDialog.FullScreenDialog
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -100,13 +100,17 @@ class ProfileActivity : AppCompatActivity() {
             Companion.BITMAP = bitmap
             val activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this@ProfileActivity,
-                card_foto,
+                foto_pefil,
                 "image"
             )
             val intent = Intent(this@ProfileActivity, VerImagenActivity::class.java)
             startActivity(intent, activityOptionsCompat.toBundle())
         }
 
+        ln_datos.setOnClickListener{
+            val dialogFragment = FullScreenDialog.newInstance()
+            dialogFragment?.show(supportFragmentManager, "tag")
+        }
 
     }
 

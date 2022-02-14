@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1040914322869",
+    "project_id": "roble2",
+    "storage_bucket": "roble2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040914322869:android:c16b20e2cd01595cb6b5fc",
+        "android_client_info": {
+          "package_name": "com.example.roblemejorado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040914322869-gepi22t17kbjt935lq4go1rv60jifvjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhzPqL5TUBRfzXRNdSgocVI8yTcRwR_L0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040914322869-gepi22t17kbjt935lq4go1rv60jifvjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Actualizar datos, Profesores, Centro..." />
+                    android:text="Actualizar datos, cambiar contraseña..." />
             </LinearLayout>
         </LinearLayout>
 
