@@ -1,6 +1,7 @@
 package com.example.roblemejorado.activities
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -85,6 +86,9 @@ class LoginActivity : AppCompatActivity() {
                             if (it.isSuccessful) {
                                 progressDialog.dismiss()
                                 val intent = Intent(this, MainActivity::class.java)
+                                getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE).edit().apply(){
+                                    putString("contrasenaUsuario",edit_password.text!!.trim().toString())
+                                }.commit()
                                 startActivity(intent)
                                 finish()
                             } else {

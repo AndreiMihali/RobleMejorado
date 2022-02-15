@@ -40,9 +40,120 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:padding="10dp"
             android:layout_below="@id/txt_nombre_usuario"
             android:layout_height="match_parent">
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:hint="NIA"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_uid"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:background="@color/white"
+                    android:text="12324"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:hint="Curso"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_matriculado"
+                    android:background="@color/white"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="2º de C.F.G.S (Des. aplic multiplataforma)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:hint="Tutor"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_tutor"
+                    android:background="@color/white"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="Miguel Hornos, Velazquez"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:hint="Nombre"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:text="Andrei Mihali Razvan"
+                    android:id="@+id/ed_nombre"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:hint="Usuario"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:text="andrei.mihali"
+                    android:id="@+id/ed_usuario"
+                    android:background="@color/white"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:hint="Correo"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:text="andrei.mihali@educa.madrid.org"
+                    android:id="@+id/ed_correo"
+                    android:background="@color/white"
+                    android:focusable="false"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cambiarContrasena"
+                android:layout_width="wrap_content"
+                android:text="CAMBIAR CONTRASEÑA"
+                app:icon="@drawable/ic_baseline_edit_24"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </RelativeLayout>
 

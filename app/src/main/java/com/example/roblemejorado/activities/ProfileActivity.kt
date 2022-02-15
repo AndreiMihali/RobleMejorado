@@ -1,6 +1,7 @@
 package com.example.roblemejorado.activities
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -8,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,7 +26,9 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.roblemejorado.R
 import com.example.roblemejorado.common.Companion
+import com.example.roblemejorado.common.UsuarioCompartido
 import com.example.roblemejorado.fullScreenDialog.FullScreenDialog
+import com.example.roblemejorado.model.Usuario
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -51,15 +55,19 @@ class ProfileActivity : AppCompatActivity() {
     private val PERMISSION_CODE_CAMERA=1
     private val PERMISSION_CODE_GALLERY=2
     private lateinit var bottomSheetPick:BottomSheetDialog
-    private lateinit var storage:FirebaseStorage
     private lateinit var uri:Uri
     private lateinit var firestore:FirebaseFirestore
     private lateinit var progressDialog: ProgressDialog
+    private var curso=""
+    private var tutor=""
+    private var nombre=""
+    private var usuario=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         init()
+        getUserData()
     }
 
     private fun init(){
@@ -108,7 +116,8 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         ln_datos.setOnClickListener{
-            val dialogFragment = FullScreenDialog.newInstance()
+            val dialogFragment = FullScreenDialog.newInstance(Usuario(curso, tutor, nombre, usuario, null))
+            UsuarioCompartido.USUARIO.contra=getSharedPreferences(getString(R.string.preferences),Context.MODE_PRIVATE).getString("contrasenaUsuario","").toString()
             dialogFragment?.show(supportFragmentManager, "tag")
         }
 
@@ -247,5 +256,18 @@ class ProfileActivity : AppCompatActivity() {
         val contentResolver=contentResolver
         val mimeType=MimeTypeMap.getSingleton()
         return mimeType.getExtensionFromMimeType(contentResolver.getType(uri))
+    }
+
+    private fun getUserData() {
+        FirebaseAuth.getInstance().currentUser.let {
+            firestore.collection("users").document(FirebaseAuth.getInstance().currentUser?.email.toString()).get().addOnSuccessListener {
+                curso=it.get("matriculado").toString()
+                tutor=it.get("tutor").toString()
+                nombre="${it.get("nombre").toString()} ${it.get("Apellidos").toString()}"
+                usuario=it.get("usuario").toString()
+            }.addOnFailureListener {
+                Log.d("FullScreenDialog","Error al cargar los datos de la base de datos ${it.message}")
+            }
+        }
     }
 }
