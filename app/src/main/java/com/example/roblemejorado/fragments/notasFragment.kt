@@ -54,18 +54,24 @@ class notasFragment : Fragment() {
         grupo_botones.addOnButtonCheckedListener{toggleButton, checkedId, isChecked->
             when(checkedId){
                 R.id.button1->{txt_evaluacion.text="1º EVALUACIÓN"
-                                getData()
-                                card_media_global.visibility=View.VISIBLE}
+                    recyclerView.removeAllViews()
+                    getData()
+                    card_media_global.visibility=View.VISIBLE}
                 R.id.button1_1->{txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
-                                recyclerView.removeAllViewsInLayout()
-                                card_media_global.visibility=View.INVISIBLE}
+                    data.clear()
+                    recyclerView.removeAllViews()
+                    verMensaje()
+                    card_media_global.visibility=View.INVISIBLE}
                 R.id.button2->{txt_evaluacion.text="ORDINARIA"
-                                recyclerView.removeAllViewsInLayout()
-                                card_media_global.visibility=View.INVISIBLE}
+                    data.clear()
+                    recyclerView.removeAllViews()
+                    verMensaje()
+                    card_media_global.visibility=View.INVISIBLE}
                 R.id.button3->{txt_evaluacion.text="EXTRAORDINARIA"
-                                data.clear()
-                                recyclerView.removeAllViewsInLayout()
-                                card_media_global.visibility=View.INVISIBLE}
+                    data.clear()
+                    recyclerView.removeAllViews()
+                    verMensaje()
+                    card_media_global.visibility=View.INVISIBLE}
             }
         }
         return view;
@@ -73,7 +79,6 @@ class notasFragment : Fragment() {
 
     private fun getData(){
         data.clear()
-
         var auth=FirebaseAuth.getInstance().currentUser
         var bd=FirebaseFirestore.getInstance()
         var asignaturas: java.util.HashMap<String,Int>
@@ -96,6 +101,10 @@ class notasFragment : Fragment() {
                 Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG);
             }
         }
+    }
+
+    private fun verMensaje(){
+        Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG).show()
     }
 
     private fun pintarMedia(evalu:String,media:Double){
