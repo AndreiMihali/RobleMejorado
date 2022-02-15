@@ -9,8 +9,8 @@
             android:title="Página principal" />
 
         <item android:id="@+id/faltasFragment"
-            android:icon="@drawable/bxs_calendar_check"
-            android:title="Faltas de asistencia"/>
+            android:icon="@drawable/ic_baseline_message_24"
+            android:title="Mensajes"/>
 
         <item android:id="@+id/notasFragment"
             android:icon="@drawable/bxs_graduation"

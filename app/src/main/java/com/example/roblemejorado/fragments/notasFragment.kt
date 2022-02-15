@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,10 +16,8 @@ import com.example.roblemejorado.adapters.NotaAdapter
 import com.example.roblemejorado.model.Notas
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlin.math.roundToInt
 
 
@@ -48,14 +45,16 @@ class notasFragment : Fragment() {
         media=view.findViewById(R.id.nota_media)
         card_media=view.findViewById(R.id.card_media)
         data= ArrayList()
-        getData1("1_EVA")
         recyclerView.layoutManager=LinearLayoutManager(activity?.applicationContext)
+
+        getData("1_EVA",txt_evaluacion.text.toString())
 
         grupo_botones.addOnButtonCheckedListener{toggleButton, checkedId, isChecked->
             when(checkedId){
                 R.id.button1->{txt_evaluacion.text="1º EVALUACIÓN"
-                                getData1("1_EVA")}
-                R.id.button1_1->txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
+                                getData("1_EVA",txt_evaluacion.text.toString()) }
+                R.id.button1_1->{txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
+                                getData("RECU_1",txt_evaluacion.text.toString()) }
                 R.id.button2->txt_evaluacion.text="ORDINARIA"
                 R.id.button3->txt_evaluacion.text="EXTRAORDINARIA"
             }
@@ -63,11 +62,11 @@ class notasFragment : Fragment() {
         return view;
     }
 
-    private fun getData1(evaluacion:String){
+    private fun getData(evaluacion:String,nombre:String){
         data.clear()
         var auth=FirebaseAuth.getInstance().currentUser
         var bd=FirebaseFirestore.getInstance()
-        var asignaturas: java.util.HashMap<String, Int>
+        var asignaturas: java.util.HashMap<String,Int>
         var media=0.0
         auth?.let {
             bd.collection("users").document(auth.email!!).get().addOnSuccessListener {
@@ -79,15 +78,14 @@ class notasFragment : Fragment() {
                 data.let {
                     adapter= NotaAdapter(data,activity?.applicationContext!!)
                     recyclerView.adapter=adapter
-                    pintarMedia("1º EVALUACIÓN",media)
+                    pintarMedia(nombre,media)
                 }
-                if (data.isEmpty())Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG);
+                if (data.isEmpty())Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG)
             }.addOnFailureListener{
                 Log.d("ERROR EN CARGA DE NOTAS","ERROR AL CARGAR LAS NOTAS "+it.message)
                 Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG);
             }
         }
-
     }
 
     private fun pintarMedia(evalu:String,media:Double){
