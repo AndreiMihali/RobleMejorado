@@ -190,9 +190,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun llamarGaleria() {
-        val gallery=Intent(Intent.ACTION_GET_CONTENT)
-        gallery.addCategory("android.intent.category.OPENABLE")
-        gallery.type = "*/*"
+        val gallery=Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         activityResultLauncher.launch(gallery)
     }
 

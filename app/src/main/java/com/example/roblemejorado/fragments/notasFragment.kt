@@ -31,6 +31,7 @@ class notasFragment : Fragment() {
     private lateinit var txt_media:TextView
     private lateinit var media:TextView
     private lateinit var card_media:MaterialCardView
+    private lateinit var card_media_global:MaterialCardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,33 +45,42 @@ class notasFragment : Fragment() {
         txt_media=view.findViewById(R.id.media)
         media=view.findViewById(R.id.nota_media)
         card_media=view.findViewById(R.id.card_media)
+        card_media_global=view.findViewById(R.id.card_media_global)
         data= ArrayList()
         recyclerView.layoutManager=LinearLayoutManager(activity?.applicationContext)
 
-        getData("1_EVA",txt_evaluacion.text.toString())
+        getData()
 
         grupo_botones.addOnButtonCheckedListener{toggleButton, checkedId, isChecked->
             when(checkedId){
                 R.id.button1->{txt_evaluacion.text="1º EVALUACIÓN"
-                                getData("1_EVA",txt_evaluacion.text.toString()) }
+                                getData()
+                                card_media_global.visibility=View.VISIBLE}
                 R.id.button1_1->{txt_evaluacion.text="RECUPERACION 1º EVALUACIÓN"
-                                getData("RECU_1",txt_evaluacion.text.toString()) }
-                R.id.button2->txt_evaluacion.text="ORDINARIA"
-                R.id.button3->txt_evaluacion.text="EXTRAORDINARIA"
+                                recyclerView.removeAllViewsInLayout()
+                                card_media_global.visibility=View.INVISIBLE}
+                R.id.button2->{txt_evaluacion.text="ORDINARIA"
+                                recyclerView.removeAllViewsInLayout()
+                                card_media_global.visibility=View.INVISIBLE}
+                R.id.button3->{txt_evaluacion.text="EXTRAORDINARIA"
+                                data.clear()
+                                recyclerView.removeAllViewsInLayout()
+                                card_media_global.visibility=View.INVISIBLE}
             }
         }
         return view;
     }
 
-    private fun getData(evaluacion:String,nombre:String){
+    private fun getData(){
         data.clear()
+
         var auth=FirebaseAuth.getInstance().currentUser
         var bd=FirebaseFirestore.getInstance()
         var asignaturas: java.util.HashMap<String,Int>
         var media=0.0
         auth?.let {
             bd.collection("users").document(auth.email!!).get().addOnSuccessListener {
-                asignaturas=it.get(evaluacion) as HashMap<String, Int>
+                asignaturas=it.get("1_EVA") as HashMap<String, Int>
                 asignaturas.forEach{(key,value) ->
                     data.add(Notas(key,value))
                     media+=value
@@ -78,9 +88,9 @@ class notasFragment : Fragment() {
                 data.let {
                     adapter= NotaAdapter(data,activity?.applicationContext!!)
                     recyclerView.adapter=adapter
-                    pintarMedia(nombre,media)
+                    pintarMedia("1º Evaluación",media)
                 }
-                if (data.isEmpty())Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG)
+                if (data.isEmpty())Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG).show()
             }.addOnFailureListener{
                 Log.d("ERROR EN CARGA DE NOTAS","ERROR AL CARGAR LAS NOTAS "+it.message)
                 Toast.makeText(activity?.applicationContext,"No hay notas en este momento",Toast.LENGTH_LONG);
@@ -97,5 +107,6 @@ class notasFragment : Fragment() {
         }
         this.media.text= (media / data.size).roundToInt().toString()
     }
+
 
 }

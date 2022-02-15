@@ -10,7 +10,6 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/activity_main.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/activity_profile.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/activity_ver_imagen.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/bottom_sheet_cambiar_contra.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/bottom_shett_pick.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/drawer_header.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/fragment_home.xml" value="0.17831813576494426" />
@@ -18,8 +17,15 @@
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/item_nota.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/toolbar_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/toolbar_profile.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/layout/vista_cambiar_datos.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/ProyectoRoble2/RobleMejorado/app/src/main/res/menu/menu_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/drawable-v24/bx_x_circle.xml" value="0.3115" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/drawable/back_drop.xml" value="0.3115" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/bottom_shett_pick.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/fragment_notas.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/item_nota.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/at2dam2/AndroidStudioProjects/Roble2/RobleMejorado/app/src/main/res/layout/vista_cambiar_datos.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/at2dam2/AndroidStudioProjects/RobleMejorado/app/src/main/res/drawable/back_drop.xml" value="0.3675" />
         <entry key="..\:/Users/at2dam2/AndroidStudioProjects/RobleMejorado/app/src/main/res/drawable/bx_exit.xml" value="0.3675" />
         <entry key="..\:/Users/at2dam2/AndroidStudioProjects/RobleMejorado/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
