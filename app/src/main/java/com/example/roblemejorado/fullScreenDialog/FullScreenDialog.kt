@@ -1,6 +1,7 @@
 package com.example.roblemejorado.fullScreenDialog
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -31,6 +32,7 @@ class FullScreenDialog: DialogFragment() {
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var progressDialog:ProgressDialog
+    private lateinit var sp:SharedPreferences
 
     companion object{
         fun newInstance(usuario:Usuario): FullScreenDialog? {
@@ -58,6 +60,7 @@ class FullScreenDialog: DialogFragment() {
     ): View? {
         val view: View =inflater.inflate(R.layout.vista_cambiar_datos,container,false)
         val toolbar=view.findViewById<Toolbar>(R.id.toolbar)
+        sp= activity?.getSharedPreferences(getString(R.string.preferences),Context.MODE_PRIVATE)!!
         progressDialog= ProgressDialog(view.context)
         progressDialog.setMessage("Actualizando contraseña, por favor espere...")
         toolbar.setNavigationOnClickListener{
@@ -105,8 +108,12 @@ class FullScreenDialog: DialogFragment() {
                     progressDialog.show()
                     val credential=EmailAuthProvider.getCredential(FirebaseAuth.getInstance().currentUser?.email.toString(),UsuarioCompartido.USUARIO.contra!!)
                     FirebaseAuth.getInstance().currentUser?.reauthenticate(credential)?.addOnSuccessListener {
-                        FirebaseAuth.getInstance().currentUser?.updatePassword(nuevaContra.text.toString())?.addOnSuccessListener {
+                        FirebaseAuth.getInstance().currentUser?.updatePassword(nuevaContra.text.toString().trim())?.addOnSuccessListener {
                             Toast.makeText(view.context,"La contraseña se ha actualizado correctamente",Toast.LENGTH_LONG).show()
+                            UsuarioCompartido.USUARIO.contra=nuevaContra.text.toString().trim()
+                            sp.edit().apply(){
+                                putString("contrasenaUsuario",nuevaContra.text.toString().trim())
+                            }.commit()
                             bottomSheetDialog.dismiss()
                             progressDialog.dismiss()
                         }?.addOnFailureListener {
