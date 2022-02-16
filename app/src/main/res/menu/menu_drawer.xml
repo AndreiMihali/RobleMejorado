@@ -26,12 +26,19 @@
             android:checkable="false"/>
 
     </group>
-    <group android:id="@+id/grupo2">
+    <group android:id="@+id/grupo2"
+        android:checkableBehavior="none">
+
+        <item android:id="@+id/setiings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Ajustes"/>
 
         <item android:id="@+id/aboutUsFragment"
+            android:icon="@drawable/bxs_calendar_check"
             android:title="Calendario" />
 
         <item android:id="@+id/helpUsFragment"
+            android:icon="@drawable/ic_baseline_new_releases_24"
             android:title="Tablón anuncios" />
     </group>
 </menu>

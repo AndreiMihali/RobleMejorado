@@ -1,6 +1,7 @@
 package com.example.roblemejorado.activities
 
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -114,7 +115,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawerLayout.close()
-        if(item.itemId!=R.id.profileActivity){
+        if(item.itemId!=R.id.profileActivity&&item.itemId!=R.id.aboutUsFragment&&item.itemId!=R.id.helpUsFragment&&item.itemId!=R.id.setiings){
             item.isChecked=true
         }
 
@@ -132,6 +133,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 }
                 startActivity(intent)
             }
+            R.id.aboutUsFragment->setMesssageDialog()
+            R.id.helpUsFragment->setMesssageDialog()
             else -> return true
         }
         return true
@@ -142,6 +145,17 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         getUserData()
     }
 
+    private fun setMesssageDialog(){
+        val builder=AlertDialog.Builder(this)
+        builder.apply {
+            setMessage("Esta opción esta en desarrollo")
+            setPositiveButton("Volver", DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel()
+            })
+        }
+        val dialog=builder.create()
+        dialog.show()
+    }
 
     private fun getUserData(){
         val auth=FirebaseAuth.getInstance().currentUser

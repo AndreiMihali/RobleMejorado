@@ -1,5 +1,6 @@
 package com.example.roblemejorado.activities
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -121,6 +122,22 @@ class ProfileActivity : AppCompatActivity() {
             dialogFragment?.show(supportFragmentManager, "tag")
         }
 
+        ln_faltas.setOnClickListener{
+            showAlertMessage()
+        }
+
+    }
+
+    private fun showAlertMessage() {
+        val builder=AlertDialog.Builder(this)
+        builder.apply {
+            setMessage("Esta opción no esta disponible en estos momentos")
+            setPositiveButton("Volver"){dialog,wich->
+                dialog.cancel()
+            }
+        }
+        val dialog=builder.create()
+        dialog.show()
     }
 
     private fun showBottomSheePick() {

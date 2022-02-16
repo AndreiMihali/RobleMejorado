@@ -1,5 +1,6 @@
 package com.example.roblemejorado.fullScreenDialog
 
+import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -29,6 +30,7 @@ import com.google.firebase.ktx.Firebase
 class FullScreenDialog: DialogFragment() {
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var progressDialog:ProgressDialog
 
     companion object{
         fun newInstance(usuario:Usuario): FullScreenDialog? {
@@ -56,6 +58,8 @@ class FullScreenDialog: DialogFragment() {
     ): View? {
         val view: View =inflater.inflate(R.layout.vista_cambiar_datos,container,false)
         val toolbar=view.findViewById<Toolbar>(R.id.toolbar)
+        progressDialog= ProgressDialog(view.context)
+        progressDialog.setMessage("Actualizando contraseña, por favor espere...")
         toolbar.setNavigationOnClickListener{
             dismiss()
         }
@@ -98,17 +102,21 @@ class FullScreenDialog: DialogFragment() {
                     layout.error="Debes introducir un mínimo de 6 carácteres"
                 }
                 else -> {
+                    progressDialog.show()
                     val credential=EmailAuthProvider.getCredential(FirebaseAuth.getInstance().currentUser?.email.toString(),UsuarioCompartido.USUARIO.contra!!)
                     FirebaseAuth.getInstance().currentUser?.reauthenticate(credential)?.addOnSuccessListener {
                         FirebaseAuth.getInstance().currentUser?.updatePassword(nuevaContra.text.toString())?.addOnSuccessListener {
                             Toast.makeText(view.context,"La contraseña se ha actualizado correctamente",Toast.LENGTH_LONG).show()
                             bottomSheetDialog.dismiss()
+                            progressDialog.dismiss()
                         }?.addOnFailureListener {
                             Log.d("FullScrennDialog","Error al actualizar la contraseña ${it.message}")
+                            progressDialog.dismiss()
                             bottomSheetDialog.dismiss()
                         }
                     }?.addOnFailureListener{
                         Log.d("FullScrennDialog","Error al reauthenticarse ${it.message}")
+                        progressDialog.dismiss()
                     }
                 }
             }
