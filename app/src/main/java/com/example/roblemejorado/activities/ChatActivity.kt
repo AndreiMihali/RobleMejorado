@@ -2,6 +2,8 @@ package com.example.roblemejorado.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Camera
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -9,9 +11,15 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +48,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var data:ArrayList<Chat>
     private lateinit var reference: DatabaseReference
     private lateinit var user:FirebaseUser
+    private lateinit var imageCamera:ImageButton
+    private lateinit var imgeAttach:ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_FullScreenDialog)
@@ -60,6 +70,8 @@ class ChatActivity : AppCompatActivity() {
         reference=FirebaseDatabase.getInstance().reference
         ed_text=findViewById(R.id.ed_message)
         user=FirebaseAuth.getInstance()?.currentUser!!
+        imageCamera=findViewById(R.id.btn_camera)
+        imgeAttach=findViewById(R.id.btn_file)
         if(receiverId!=null){
             nombreUsuario.text=bundle.getStringExtra("userName")
             Glide.with(this).load(bundle.getStringExtra("userProfile")).into(imagenPerfil)
@@ -73,12 +85,33 @@ class ChatActivity : AppCompatActivity() {
         readChatList()
 
 
+
+    }
+
+    private fun showDialog(){
+        val builder= AlertDialog.Builder(this).apply {
+            title="Atención"
+            setMessage("Esta opción esta en desarrollo")
+            setPositiveButton("Aceptar") { dialog, wich ->
+                dialog.cancel()
+            }
+        }
+        val dialog=builder.create()
+        dialog.show()
     }
 
     private fun initClickListeners(){
         toolbar.setNavigationOnClickListener {
             onBackPressed()
             finish()
+        }
+
+        imageCamera.setOnClickListener {
+            showDialog()
+        }
+
+        imgeAttach.setOnClickListener {
+            showDialog()
         }
 
         ed_text.addTextChangedListener(object : TextWatcher {
