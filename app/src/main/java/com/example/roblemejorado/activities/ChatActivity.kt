@@ -2,6 +2,7 @@ package com.example.roblemejorado.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -10,7 +11,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,15 +20,12 @@ import com.bumptech.glide.Glide
 import com.example.roblemejorado.R
 import com.example.roblemejorado.adapters.AdapterChat
 import com.example.roblemejorado.model.Chat
-import com.example.roblemejorado.model.UsuariosMensajes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -73,6 +71,7 @@ class ChatActivity : AppCompatActivity() {
         lm.stackFromEnd = true
         recyclerView.layoutManager = lm
         readChatList()
+
 
     }
 
@@ -142,6 +141,7 @@ class ChatActivity : AppCompatActivity() {
     private fun readChatList(){
         val reference=FirebaseDatabase.getInstance().reference
         reference.child("Chats").addValueEventListener(object : ValueEventListener {
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 for(snap in snapshot.children){
@@ -153,6 +153,7 @@ class ChatActivity : AppCompatActivity() {
                 }
                 if(adapter!=null){
                     adapter?.notifyItemInserted(data.size-1)
+                    recyclerView.layoutManager?.scrollToPosition(data.size-1)
                 }else{
                     adapter= AdapterChat(applicationContext,data)
                     recyclerView.adapter=adapter
