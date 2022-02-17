@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             }
             R.id.aboutUsFragment->setMesssageDialog()
             R.id.helpUsFragment->setMesssageDialog()
+            R.id.setiings->startActivity(Intent(this,SettingsActivity::class.java))
             else -> return true
         }
         return true
