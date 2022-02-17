@@ -49,14 +49,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mensajes"
+        android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:layout_above="@id/ln_escribir"
-        android:layout_below="@id/toolbar" />
+        android:layout_below="@id/toolbar"/>
 
     <LinearLayout
         android:id="@+id/ln_escribir"
         android:layout_width="match_parent"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">

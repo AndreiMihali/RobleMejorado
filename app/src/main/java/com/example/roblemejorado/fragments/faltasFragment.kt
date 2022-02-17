@@ -24,6 +24,7 @@ class faltasFragment : Fragment(){
     private lateinit var adapter:MensajesAdapter
     private lateinit var firestore:FirebaseFirestore
     private lateinit var user:UsuariosMensajes
+    private var count=-1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +37,12 @@ class faltasFragment : Fragment(){
         data= ArrayList()
         firestore= FirebaseFirestore.getInstance()
         getData()
+        count=0
         return view;
     }
 
     private fun getData(){
+        data.clear()
         firestore.collection("users").get().addOnSuccessListener {
             for(query in it){
                 val userId=query.get("userId").toString()
@@ -58,6 +61,14 @@ class faltasFragment : Fragment(){
         }.addOnFailureListener{
             Toast.makeText(activity?.applicationContext,"Error",Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(count>=1){
+            getData()
+        }
+        count++
     }
 
 }
