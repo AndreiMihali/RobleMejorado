@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RobleMejorado">
         <activity
+            android:name=".activities.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.VerImagenActivity"
             android:exported="false" />
         <activity
