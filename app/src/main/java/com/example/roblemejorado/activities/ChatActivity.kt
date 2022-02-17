@@ -104,19 +104,21 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun sendTextMessage(toString: String) {
-        val date= Calendar.getInstance().time
-        @SuppressLint("SimpleDateFormat") val formatter=SimpleDateFormat("dd-mm-yyyy")
-        val today=formatter.format(date)
 
         val currentDateTime=Calendar.getInstance()
-        @SuppressLint("SimpleDateFormat") val df=SimpleDateFormat("hh:mm:ss")
-        val currentTime=df.format(currentDateTime.time)
+        @SuppressLint("SimpleDateFormat")
+        val currentTime=currentDateTime.time.toLocaleString()
+
+        val t=Calendar.getInstance().time
+        val formatt=SimpleDateFormat("HH:mm")
+        val time=formatt.format(t)
 
         val chat=Chat(
-            "$today $currentTime",
+            "$currentTime",
             toString,
             user.uid,
-            receiverId
+            receiverId,
+            time.toString()
         )
 
         val map=HashMap<String,String>()
@@ -150,7 +152,7 @@ class ChatActivity : AppCompatActivity() {
                     }
                 }
                 if(adapter!=null){
-                    adapter?.notifyDataSetChanged()
+                    adapter?.notifyItemInserted(data.size-1)
                 }else{
                     adapter= AdapterChat(applicationContext,data)
                     recyclerView.adapter=adapter

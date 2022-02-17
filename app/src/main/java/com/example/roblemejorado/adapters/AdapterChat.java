@@ -27,6 +27,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ViewHolder> {
     public static final int MSG_TYPE_RIGHT=1;
     private FirebaseUser firebaseUser;
 
+
     public AdapterChat(Context context,ArrayList<Chat> data){
         this.context=context;
         this.data=data;
@@ -56,14 +57,17 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView message;
+        private TextView hora;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             message=itemView.findViewById(R.id.txt_message);
+            hora=itemView.findViewById(R.id.txt_hora);
         }
 
         void bind(Chat chat){
             message.setText(chat.getTextMessage());
+            hora.setText(chat.getTime());
         }
     }
 
@@ -73,14 +77,14 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ViewHolder> {
 
         if(data.get(position).getSender().equals(firebaseUser.getUid())){
             if(position == (data.size()-1)){
-                setMessage(firebaseUser.getEmail(),data.get(position).getTextMessage());
-                setMessage("usuario.prueba@educa.madrid.org",data.get(position).getTextMessage());
+                setMessage(firebaseUser.getEmail(),data.get(position).getDateTime());
+                setMessage("usuario.prueba@educa.madrid.org",data.get(position).getDateTime());
             }
             return MSG_TYPE_RIGHT;
         }else{
             if(position == (data.size()-1)){
-                setMessage("usuario.prueba@educa.madrid.org",data.get(position).getTextMessage());
-                setMessage(firebaseUser.getEmail(),data.get(position).getTextMessage());
+                setMessage("usuario.prueba@educa.madrid.org",data.get(position).getDateTime());
+                setMessage(firebaseUser.getEmail(),data.get(position).getDateTime());
             }
             return MSG_TYPE_LEFT;
         }

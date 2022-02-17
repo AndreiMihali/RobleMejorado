@@ -49,12 +49,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mensajes"
-        android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
         android:layout_above="@id/ln_escribir"
-        android:layout_below="@id/toolbar"/>
+        android:layout_below="@id/toolbar"
+        android:background="@android:color/transparent"
+        android:paddingHorizontal="5dp" />
 
     <LinearLayout
         android:id="@+id/ln_escribir"
@@ -91,7 +91,7 @@
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
                     android:background="@android:color/transparent"
-                    android:hint="Type a message"
+                    android:hint="Escribe un mensaje"
                     android:outlineProvider="none"
                     android:padding="8dp"
                     tools:ignore="TouchTargetSizeCheck" />
