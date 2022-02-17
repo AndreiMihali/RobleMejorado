@@ -1,6 +1,8 @@
 package com.example.roblemejorado.activities
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Camera
 import android.net.Uri
@@ -22,6 +24,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.loader.content.AsyncTaskLoader
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
