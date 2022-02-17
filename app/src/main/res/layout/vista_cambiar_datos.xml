@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:navigationIcon="@drawable/ic_baseline_close_24"
         app:navigationIconTint="@color/white"
         app:title="Datos personales"
         app:titleTextColor="@color/white">
